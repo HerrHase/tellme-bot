@@ -1,0 +1,15 @@
+{
+    "name": "server",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "type": "module",
+    "dependencies": {
+        "@xmpp/client": "^0.13.0",
+        "dotenv": "^10.0.0",
+        "fastify": "^3.24.0",
+        "fastify-formbody": "^5.2.0",
+        "isomorphic-dompurify": "^0.16.0"
+    }
+}

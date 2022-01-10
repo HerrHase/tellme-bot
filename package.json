@@ -1,0 +1,10 @@
+{
+    "private": true,
+    "name": "tellme-bot",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "start": "yarn workspace server run start"
+    }
+}
