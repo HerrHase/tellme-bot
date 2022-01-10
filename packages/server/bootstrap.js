@@ -55,7 +55,7 @@ eventEmitter.on('send-xmpp', async (data) =>
             'message',
             {
                 type: 'chat',
-                to: env.XMPP_TO
+                to: process.env.XMPP_TO
              },
              xml('body', {}, data.message)
         )
