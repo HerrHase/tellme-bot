@@ -13,6 +13,12 @@ const server = fastify()
  *
  */
 import { client, xml } from '@xmpp/client'
+import { EventEmitter } from 'events'
+
+
+// create eventemitter for sending messages
+// @TODO find a better solution, was only to use it with online event, but not working as expected
+const eventEmitter = new EventEmitter()
 
 const xmpp = client({
     service: process.env.XMPP_SERVICE,
@@ -25,31 +31,12 @@ xmpp.on('error', (error) => {
     console.error(error)
 })
 
-xmpp.on('online', (address) => {
-    console.log('connected to ' + address)
-})
-
-xmpp.on('offline', (error) => {
-    console.log('offline')
-})
-
-xmpp.start().catch(console.error)
-
-/**
- *  add eventemitter
- *
- *  @TODO find a better solution, was only to use it with online event, but not working as expected
- *
- */
-
-import { EventEmitter } from 'events'
-
-const eventEmitter = new EventEmitter()
-
-eventEmitter.on('send-xmpp', async (data) =>
+xmpp.on('online', (address) =>
 {
-    if (xmpp.status === 'online') {
+    console.log('connected to ' + address)
 
+    eventEmitter.on('send-message', async (data) =>
+    {
         // Sends a chat message to itself
         const message = xml(
             'message',
@@ -61,8 +48,14 @@ eventEmitter.on('send-xmpp', async (data) =>
         )
 
         await xmpp.send(message)
-    }
+    })
 })
+
+xmpp.on('offline', (error) => {
+    console.log('offline')
+})
+
+xmpp.start().catch(console.error)
 
 /**
  *  add routes
@@ -74,7 +67,7 @@ import webhookHttp from './http/api/webhook.js'
 server
     .register(webhookHttp, {
         'prefix': '/api/webhook',
-        'eventEmitter': eventEmitter
+        'eventEmitter': eventEmitter // @TODO shift to a more fastify-way
     })
 
 export default server

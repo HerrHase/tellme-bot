@@ -1,11 +1,8 @@
-import DOMPurify from 'isomorphic-dompurify'
-import { EventEmitter } from 'events'
-
 /**
- *  handle auth
+ *  handle webhook
  *
  *  @author Björn Hase, Tentakelfabrik
- *  @license http://opensource.org/licenses/MIT The MIT License
+ *  @license hhttps://www.gnu.org/licenses/gpl-3.0.en.html GPL-3
  *  @link https://gitea.tentakelfabrik.de:tentakelfabrik/tellme-bot.git
  *
  */
@@ -13,7 +10,7 @@ import { EventEmitter } from 'events'
 export default async function(fastify, opts)
 {
     /**
-     *  auth
+     *  getting post getting allowed parser class and send over xmpp
      *
      *  @param  {object} request
      *  @param  {object} response
@@ -36,13 +33,14 @@ export default async function(fastify, opts)
                 .send()
         }
 
+        // getting parser and set body to parser
         const Parser = await import('./../../parsers/' + request.params.parser + '.js')
         const parser = new Parser.default(request.body)
 
         const result = parser.run()
 
         // send event for send xmpp
-        opts.eventEmitter.emit('send-xmpp', {
+        opts.eventEmitter.emit('send-message', {
             'message': result
         })
 
