@@ -1,13 +1,12 @@
 # tellme-bot
 
 Small bot to handle Webhooks, Parse and Send them with Xmpp. This is a Prototype and only exists
-because (Kuma)[https://github.com/louislam/uptime-kuma] offers no Notifications for Xmpp.
+because [https://github.com/louislam/uptime-kuma](Kuma) offers no Notifications for Xmpp.
 
 ## Install
 
 ```
 yarn install
-
 yarn start
 
 or
@@ -33,7 +32,7 @@ XMPP_TO=
 
 ## Webhook
 
-<your-domain>/api/v1/webhook/<parser>/<api-token>
+\<domain\>/api/v1/webhook/\<parser\>/\<api-token\>
 
 ## Parsers
 
