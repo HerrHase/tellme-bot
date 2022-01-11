@@ -1,7 +1,7 @@
 # tellme-bot
 
 Small bot to handle Webhooks, Parse and Send them with Xmpp. This is a Prototype and only exists
-because [https://github.com/louislam/uptime-kuma](Kuma) offers no Notifications for Xmpp.
+because [Kuma](https://github.com/louislam/uptime-kuma) offers no Notifications for Xmpp.
 
 ## Install
 
