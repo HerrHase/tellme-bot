@@ -39,4 +39,4 @@ XMPP_TO=
 There is only one Parser Class for Kuma, but it is possible to add Additional Classes.
 
 Create a new Class, extends is with parser.js, add a parser-function and add the name of the file in the .env to
-APP_API_ALLOWED_PARSERS.
+**APP_API_ALLOWED_PARSERS**.
