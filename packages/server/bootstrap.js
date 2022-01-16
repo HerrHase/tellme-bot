@@ -15,10 +15,7 @@ const server = fastify()
 import { client, xml } from '@xmpp/client'
 import { EventEmitter } from 'events'
 
-
 // create eventemitter for sending messages
-// @TODO find a better solution, was only to use it with online event, but not working as expected
-
 server.decorate('eventEmitter', new EventEmitter())
 
 const xmpp = client({
