@@ -18,7 +18,8 @@ import { EventEmitter } from 'events'
 
 // create eventemitter for sending messages
 // @TODO find a better solution, was only to use it with online event, but not working as expected
-const eventEmitter = new EventEmitter()
+
+server.decorate('eventEmitter', new EventEmitter())
 
 const xmpp = client({
     service: process.env.XMPP_SERVICE,
@@ -35,7 +36,7 @@ xmpp.on('online', (address) =>
 {
     console.log('connected to ' + address)
 
-    eventEmitter.on('send-message', async (data) =>
+    server.eventEmitter.on('send-message', async (data) =>
     {
         // Sends a chat message to itself
         const message = xml(
@@ -57,6 +58,7 @@ xmpp.on('offline', (error) => {
 
 xmpp.start().catch(console.error)
 
+
 /**
  *  add routes
  *
@@ -66,8 +68,7 @@ import webhookHttp from './http/api/webhook.js'
 
 server
     .register(webhookHttp, {
-        'prefix': '/api/webhook',
-        'eventEmitter': eventEmitter // @TODO shift to a more fastify-way
+        'prefix': '/api/webhook'
     })
 
 export default server

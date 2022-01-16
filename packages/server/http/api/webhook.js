@@ -40,7 +40,7 @@ export default async function(fastify, opts)
         const result = parser.run()
 
         // send event for send xmpp
-        opts.eventEmitter.emit('send-message', {
+        fastify.eventEmitter.emit('send-message', {
             'message': result
         })
 
