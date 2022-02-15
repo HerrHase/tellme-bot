@@ -11,6 +11,8 @@ const server = fastify()
 /**
  *  xmpp
  *
+ *  import client for xmpp, adding events for handling
+ *
  */
 import { client, xml } from '@xmpp/client'
 import { EventEmitter } from 'events'
@@ -33,6 +35,7 @@ xmpp.on('online', (address) =>
 {
     console.log('connected to ' + address)
 
+    // add event if client going online
     server.eventEmitter.on('send-message', async (data) =>
     {
         // Sends a chat message to itself
@@ -51,6 +54,9 @@ xmpp.on('online', (address) =>
 
 xmpp.on('offline', (error) => {
     console.log('offline')
+
+    // remove event if client going offline
+    server.eventEmitter.off('send-message')
 })
 
 xmpp.start().catch(console.error)
