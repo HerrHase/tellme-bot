@@ -1,8 +1,8 @@
 # tellme-bot
 
-Simple Bot to receive Webhooks, parse and send them as Message to a XMPP-account. The idea result
+Simple Bot to receive Webhooks, parse and send them as Message to a [XMPP](https://xmpp.org/)-account. The idea result
 from the missing support of [Kuma](https://github.com/louislam/uptime-kuma) for sending Notifications with
-XMPP.
+[XMPP](https://xmpp.org/).
 
 ## Install
 
@@ -43,7 +43,7 @@ XMPP_TO=
 
 Existing Parsers,
 
-* Kuma / Getting Notifications from Kuma
+* Kuma / Getting Notifications from [Kuma](https://github.com/louislam/uptime-kuma)
 * Text / Getting "text" Parameter in JSON-Body
 
 ## Custom Parsers
