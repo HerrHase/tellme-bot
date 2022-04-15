@@ -4,9 +4,9 @@ import DOMPurify from 'isomorphic-dompurify'
 /**
  *  Parser for "text" in Json, is used by slack
  *
- *  @author Björn Hase, Tentakelfabrik
+ *  @author Björn Hase
  *  @license hhttps://www.gnu.org/licenses/gpl-3.0.en.html GPL-3
- *  @link https://gitea.tentakelfabrik.de:tentakelfabrik/tellme-bot.git
+ *  @link https://gitea.node001.net/HerrHase/tellme-bot.git
  *
  */
 class Text extends Parser

@@ -1,7 +1,8 @@
 # tellme-bot
 
-Small bot to handle Webhooks, Parse and Send them with Xmpp. This is a Prototype and only exists
-because [Kuma](https://github.com/louislam/uptime-kuma) offers no Notifications for Xmpp.
+Simple Bot to receive Webhooks, parse and send them as Message to a XMPP-account. The idea result
+from the missing support of [Kuma](https://github.com/louislam/uptime-kuma) for sending Notifications with
+XMPP.
 
 ## Install
 
@@ -34,9 +35,18 @@ XMPP_TO=
 
 \<domain\>/api/v1/webhook/\<parser\>/\<api-token\>
 
+## health
+
+\<domain\>/api/v1/health
+
 ## Parsers
 
-There is only one Parser Class for Kuma, but it is possible to add Additional Classes.
+Existing Parsers,
+
+* Kuma / Getting Notifications from Kuma
+* Text / Getting "text" Parameter in JSON-Body
+
+## Custom Parsers
 
 Create a new Class, extends is with parser.js, add a parser-function and add the name of the file in the .env to
 **APP_API_ALLOWED_PARSERS**.
