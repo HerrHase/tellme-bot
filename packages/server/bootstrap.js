@@ -19,7 +19,8 @@ server.register(xmpp, {
     service: process.env.XMPP_SERVICE,
     domain: process.env.XMPP_DOMAIN,
     username: process.env.XMPP_USERNAME,
-    password: process.env.XMPP_PASSWORD
+    password: process.env.XMPP_PASSWORD,
+    to: process.env.XMPP_TO
 })
 
 /**

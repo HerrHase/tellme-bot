@@ -12,7 +12,7 @@ yarn start
 
 or
 
-pm2 start yarn start --name=tellme-bot
+pm2 --name=tellme-bot start npm -- start
 ```
 
 ## Konfiguration
