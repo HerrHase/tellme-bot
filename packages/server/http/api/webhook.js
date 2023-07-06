@@ -22,7 +22,7 @@ export default async function(fastify, options) {
      *  @param  {object} response
      *
      */
-    fastify.post('/v1/:token/:parser', async function (request, response) {
+    fastify.post('/v1/:parser/:token', async function (request, response) {
 
         // getting parser from preHandler: parserHandler
         const result = response.locals.parser.run()
