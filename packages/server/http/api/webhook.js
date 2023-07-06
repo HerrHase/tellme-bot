@@ -1,3 +1,6 @@
+import tokenHandler from './../../handlers/token.js'
+import parserHandler from './../../handlers/parser.js'
+
 /**
  *  handle webhook
  *
@@ -7,8 +10,11 @@
  *
  */
 
-export default async function(fastify, opts)
-{
+export default async function(fastify, options) {
+
+    fastify.addHook('preHandler', tokenHandler)
+    fastify.addHook('preHandler', parserHandler)
+    
     /**
      *  getting post getting allowed parser class and send over xmpp
      *
@@ -16,36 +22,19 @@ export default async function(fastify, opts)
      *  @param  {object} response
      *
      */
-    fastify.post('/v1/:parser([a-zA-Z0-9]{0,255})/:token([a-zA-Z0-9])', async function (request, reply)
-    {
-        if (request.params.token !== process.env.APP_API_TOKEN) {
-            return reply
-                .code(401)
-                .send()
-        }
+    fastify.post('/v1/:parser([a-zA-Z0-9]{0,255})/:token([a-zA-Z0-9])', async function (request, response) {
 
-        // getting allowed parsers from .env as array
-        const allowedParsers = process.env.APP_API_ALLOWED_PARSERS.split(',')
-
-        if (allowedParsers.indexOf(request.params.parser) === -1) {
-            return reply
-                .code(404)
-                .send()
-        }
-
-        // getting parser and set body to parser
-        const Parser = await import('./../../parsers/' + request.params.parser + '.js')
-        const parser = new Parser.default(request.body)
-
-        const result = parser.run()
+        // getting parser from preHandler: parserHandler
+        const result = response.locals.parser.run()
 
         // send event for send xmpp
         fastify.eventEmitter.emit('send-message', {
             'message': result
         })
 
-        reply
+        response
             .code(200)
             .send()
     })
+
 }

@@ -1,5 +1,5 @@
 import Parser from './parser.js'
-import DOMPurify from 'isomorphic-dompurify'
+import * as DOMPurify from 'dompurify'
 
 /**
  *  Parser for Kuma, getting only error message
@@ -9,10 +9,14 @@ import DOMPurify from 'isomorphic-dompurify'
  *  @link https://gitea.node001.net/HerrHase/tellme-bot.git
  *
  */
-class Kuma extends Parser
-{
-    parse()
-    {
+class Kuma extends Parser {
+
+    /**
+     *
+     *  
+     */
+    parse() {
+
         // check for msg and clean it
         if (this.body.msg) {
             this.message = DOMPurify.sanitize(this.body.msg)

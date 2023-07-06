@@ -7,14 +7,14 @@
  *  @link https://gitea.node001.net/HerrHase/tellme-bot.git
  *
  */
-class Parser
-{
+class Parser {
+
     /**
      *
      *
      */
-    constructor(body)
-    {
+    constructor(body) {
+
         // body from webhook
         this.body = body
 
@@ -28,8 +28,7 @@ class Parser
      *  @return string
      *
      */
-    run()
-    {
+    run() {
         this.parse()
         return this.message
     }

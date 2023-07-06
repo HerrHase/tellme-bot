@@ -21,17 +21,22 @@ export default function (fastify, options, done) {
      */
     async function handleSendMessage(data) {
 
+        let send = false
+
         // Sends a chat message to itself
         const message = xml(
-            'message',
-            {
+            'message', {
                 type: 'chat',
                 to: options.to
             },
             xml('body', {}, data.message)
         )
 
-        await xmpp.send(message)
+        try {
+            await xmpp.send(message)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const xmpp = client({
@@ -47,9 +52,8 @@ export default function (fastify, options, done) {
     })
 
     // handle if client goes online
-    xmpp.on('online', (address) =>
-    {
-        console.log('connected to ' + address)
+    xmpp.on('online', (address) => {
+        console.log('Xmpp: connected to ' + address)
 
         // check for event and remove it
         if (fastify.eventEmitter.listeners('send-message').length > 0) {

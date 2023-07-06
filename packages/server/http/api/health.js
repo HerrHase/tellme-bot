@@ -16,9 +16,9 @@ export default async function(fastify, opts)
      *  @param  {object} response
      *
      */
-    fastify.get('/v1', async function (request, reply)
+    fastify.get('/v1', async function (request, response)
     {
-        reply
+        response
             .code(200)
             .send()
     })

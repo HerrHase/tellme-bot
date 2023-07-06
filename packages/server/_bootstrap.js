@@ -12,7 +12,11 @@ const server = fastify()
 // adding eventEmitter
 server.decorate('eventEmitter', new EventEmitter())
 
-// adding xmpp
+/**
+ *  add xmpp
+ *
+ */
+
 import xmpp from './plugins/xmpp.js'
 
 server.register(xmpp, {
@@ -22,6 +26,43 @@ server.register(xmpp, {
     password: process.env.XMPP_PASSWORD,
     to: process.env.XMPP_TO
 })
+
+/**
+ *  add helmet
+ *
+ */
+
+import helmet from '@fastify/helmet'
+ 
+server.register(
+    helmet, { 
+        referrerPolicy: {
+            policy: ['origin']
+        }
+    }
+)
+
+/**
+ *  add rateLimit
+ *
+ */
+
+import rateLimit from '@fastify/rate-limit'
+
+const rateLimitSettings = {
+    max: 100,
+    timeWindow: 60000
+}
+
+if (process.env.APP_RATE_LIMIT_MAX) {
+    rateLimitSettings.max = process.env.APP_RATE_LIMIT_MAX
+}
+
+if (process.env.APP_RATE_LIMIT_TIMEWINDOW) {
+    rateLimitSettings.timeWindow = process.env.APP_RATE_LIMIT_TIMEWINDOW
+}
+
+server.register(rateLimit, rateLimitSettings)
 
 /**
  *  add routes

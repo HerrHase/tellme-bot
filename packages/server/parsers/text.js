@@ -1,5 +1,5 @@
 import Parser from './parser.js'
-import DOMPurify from 'isomorphic-dompurify'
+import * as DOMPurify from 'dompurify'
 
 /**
  *  Parser for "text" in Json, is used by slack
@@ -9,10 +9,14 @@ import DOMPurify from 'isomorphic-dompurify'
  *  @link https://gitea.node001.net/HerrHase/tellme-bot.git
  *
  */
-class Text extends Parser
-{
-    parse()
-    {
+class Text extends Parser {
+
+    /**
+     *
+     *
+     */
+    parse() {
+        
         // check for msg and clean it
         if (this.body.text) {
             this.message = DOMPurify.sanitize(this.body.text)
