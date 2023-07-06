@@ -2,6 +2,7 @@ import fastify from 'fastify'
 import dotenv from 'dotenv'
 import path from 'path'
 import { EventEmitter } from 'events'
+import formBody from '@fastify/formbody'
 
 // getting .env
 dotenv.config({ path: path.join(path.resolve(), '/../../.env') })
@@ -11,6 +12,9 @@ const server = fastify()
 
 // adding eventEmitter
 server.decorate('eventEmitter', new EventEmitter())
+
+// adding formBody
+server.register(formBody)
 
 /**
  *  add xmpp
@@ -34,13 +38,14 @@ server.register(xmpp, {
 
 import helmet from '@fastify/helmet'
  
-server.register(
+/***
+ server.register(
     helmet, { 
         referrerPolicy: {
             policy: ['origin']
         }
     }
-)
+)*/
 
 /**
  *  add rateLimit

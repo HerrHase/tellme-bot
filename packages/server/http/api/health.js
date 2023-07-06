@@ -7,8 +7,8 @@
  *
  */
 
-export default async function(fastify, opts)
-{
+export default async function(fastify, opts) {
+
     /**
      *  getting post getting allowed parser class and send over xmpp
      *
@@ -16,8 +16,7 @@ export default async function(fastify, opts)
      *  @param  {object} response
      *
      */
-    fastify.get('/v1', async function (request, response)
-    {
+    fastify.get('/v1', async function (request, response) {
         response
             .code(200)
             .send()

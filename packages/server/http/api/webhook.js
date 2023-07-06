@@ -14,7 +14,7 @@ export default async function(fastify, options) {
 
     fastify.addHook('preHandler', tokenHandler)
     fastify.addHook('preHandler', parserHandler)
-    
+
     /**
      *  getting post getting allowed parser class and send over xmpp
      *
@@ -22,7 +22,7 @@ export default async function(fastify, options) {
      *  @param  {object} response
      *
      */
-    fastify.post('/v1/:parser([a-zA-Z0-9]{0,255})/:token([a-zA-Z0-9])', async function (request, response) {
+    fastify.post('/v1/:token/:parser', async function (request, response) {
 
         // getting parser from preHandler: parserHandler
         const result = response.locals.parser.run()

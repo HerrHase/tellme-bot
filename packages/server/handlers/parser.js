@@ -1,4 +1,4 @@
-import * as DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 
 /**
  *
@@ -21,15 +21,20 @@ async function parserHandler(request, response) {
 
     // if parser not found send 404
     if (allowedParsers.indexOf(parserName) === -1) {
+
+        console.log('Parsers: "' + parserName + '" not found!')
+
         return response
             .code(404)
             .send()
     }
 
     // getting parser and set body to parser
-    const Parser = await import('./../../parsers/' + parserName + '.js')
-    
-    response.locals.parser = new Parser.default(request.body)
+    const Parser = await import('./../parsers/' + parserName + '.js')
+
+    response.locals = {
+        parser: new Parser.default(request.body)
+    }
 }
   
 export default parserHandler

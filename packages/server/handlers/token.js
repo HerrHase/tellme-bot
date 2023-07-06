@@ -1,3 +1,5 @@
+import DOMPurify from 'isomorphic-dompurify'
+
 /**
  *  handle token
  *
@@ -7,8 +9,11 @@
  *
  */
 
-async function tokenHandler(request, token) {
-    if (request.params.token !== process.env.APP_API_TOKEN) {
+async function tokenHandler(request, response) {
+
+    const token = DOMPurify.sanitize(request.params.token)
+
+    if (token !== process.env.APP_API_TOKEN) {
         return response
             .code(401)
             .send()

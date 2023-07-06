@@ -1,5 +1,5 @@
-import Parser from './parser.js'
-import * as DOMPurify from 'dompurify'
+import Parser from './_parser.js'
+import DOMPurify from 'isomorphic-dompurify'
 
 /**
  *  Parser for Kuma, getting only error message
